@@ -3,200 +3,221 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Liu Xiang · 工程师博客</title>
+  <title>AI+CAE 每日动态 - 2026年5月10日</title>
   <style>
-    /* ── Reset & Base ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:        #0f1117;
-      --bg2:       #171b26;
-      --bg3:       #1e2333;
-      --border:    #2a3044;
-      --accent:    #4a7cf7;
-      --accent2:   #6e9fff;
+      --bg:        #0b0e17;
+      --bg2:       #111827;
+      --bg3:       #1a2236;
+      --bg4:       #0d1520;
+      --border:    #1e2d45;
+      --accent:    #3b82f6;
+      --accent2:   #60a5fa;
+      --accent-glow: rgba(59,130,246,0.25);
+      --green:     #34d399;
+      --orange:    #fb923c;
       --text:      #e2e8f0;
-      --text-muted:#8892a4;
-      --tag-bg:    #1a2540;
-      --radius:    12px;
-      --shadow:    0 4px 24px rgba(0,0,0,0.4);
+      --text2:     #cbd5e1;
+      --text-muted:#64748b;
+      --radius:    14px;
     }
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.8;
       min-height: 100vh;
     }
 
     /* ── Navbar ── */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(15,17,23,0.85);
-      backdrop-filter: blur(12px);
+      background: rgba(11,14,23,0.92);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
       padding: 0 2rem;
       display: flex; align-items: center; justify-content: space-between;
-      height: 60px;
+      height: 56px;
     }
     .nav-logo {
-      font-size: 1.15rem; font-weight: 700;
+      font-size: 1.05rem; font-weight: 700;
       color: var(--accent2);
-      letter-spacing: 0.5px;
-      text-decoration: none;
+      text-decoration: none; letter-spacing: 0.3px;
     }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      color: var(--text-muted); text-decoration: none;
-      font-size: 0.92rem; transition: color .2s;
+    .nav-badge {
+      background: rgba(59,130,246,0.15);
+      border: 1px solid rgba(59,130,246,0.3);
+      color: var(--accent2);
+      font-size: 0.75rem; padding: 3px 10px;
+      border-radius: 999px;
     }
-    .nav-links a:hover { color: var(--accent2); }
 
-    /* ── Hero ── */
-    .hero {
-      max-width: 860px; margin: 0 auto;
-      padding: 80px 2rem 60px;
+    /* ── Header ── */
+    .report-header {
+      max-width: 820px; margin: 0 auto;
+      padding: 60px 2rem 40px;
+      text-align: center;
     }
-    .hero-badge {
-      display: inline-block;
-      background: var(--tag-bg); color: var(--accent2);
-      border: 1px solid var(--border);
-      border-radius: 999px; padding: 4px 14px;
-      font-size: 0.8rem; margin-bottom: 20px;
-      letter-spacing: 0.5px;
+    .report-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.25);
+      border-radius: 999px; padding: 5px 16px;
+      font-size: 0.8rem; color: var(--accent2);
+      margin-bottom: 20px;
     }
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 800; line-height: 1.2;
-      margin-bottom: 16px;
+    .report-header h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800; line-height: 1.3;
+      margin-bottom: 12px;
     }
-    .hero h1 span {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
+    .report-header h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2), #a78bfa);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .hero p {
-      font-size: 1.1rem; color: var(--text-muted);
-      max-width: 560px; margin-bottom: 32px;
+    .report-meta {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; flex-wrap: wrap;
+      color: var(--text-muted); font-size: 0.85rem;
+      margin-top: 8px;
     }
-    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 10px 22px; border-radius: 8px;
-      font-size: 0.92rem; font-weight: 600;
-      text-decoration: none; cursor: pointer; border: none;
-      transition: transform .15s, box-shadow .15s;
+    .report-meta span { display: flex; align-items: center; gap: 4px; }
+    .divider-wide {
+      height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent);
+      max-width: 820px; margin: 0 auto 40px;
     }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-primary {
-      background: var(--accent); color: #fff;
-      box-shadow: 0 0 20px rgba(74,124,247,0.35);
-    }
-    .btn-primary:hover { box-shadow: 0 0 28px rgba(74,124,247,0.55); }
-    .btn-ghost {
-      background: var(--bg3); color: var(--text);
+
+    /* ── News Item Card ── */
+    .news-container { max-width: 820px; margin: 0 auto; padding: 0 2rem 40px; }
+
+    .news-card {
+      background: var(--bg2);
       border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 30px;
+      margin-bottom: 20px;
+      transition: border-color .25s, box-shadow .25s;
+      position: relative;
+      overflow: hidden;
     }
+    .news-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+      border-radius: 4px 0 0 4px;
+      opacity: 0; transition: opacity .25s;
+    }
+    .news-card:hover { border-color: rgba(59,130,246,0.4); }
+    .news-card:hover::before { opacity: 1; }
 
-    /* ── Section Common ── */
-    section { max-width: 860px; margin: 0 auto; padding: 0 2rem 60px; }
-    .section-title {
-      font-size: 1.4rem; font-weight: 700;
-      color: var(--text); margin-bottom: 8px;
-      display: flex; align-items: center; gap: 10px;
+    .news-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 8px;
+      font-size: 0.82rem; font-weight: 700; color: #fff;
+      margin-right: 10px; vertical-align: middle;
     }
-    .section-title::after {
-      content: ''; flex: 1; height: 1px; background: var(--border);
+    .news-title {
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--text);
+      display: inline; vertical-align: middle;
     }
-    .section-sub {
-      color: var(--text-muted); font-size: 0.88rem; margin-bottom: 28px;
+    .news-body {
+      margin-top: 16px;
+      color: var(--text2);
+      font-size: 0.92rem;
+      line-height: 1.85;
     }
+    .news-body .section-label {
+      display: block;
+      color: var(--accent2);
+      font-weight: 600;
+      font-size: 0.82rem;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+    }
+    .news-body .section-label:first-child { margin-top: 0; }
+    .news-body ul {
+      padding-left: 18px;
+      margin: 4px 0;
+    }
+    .news-body li {
+      margin-bottom: 4px;
+      color: var(--text2);
+    }
+    .news-body .check-list {
+      list-style: none; padding-left: 0;
+    }
+    .news-body .check-list li::before {
+      content: '✅ ';
+    }
+    .news-links {
+      margin-top: 14px;
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .news-link {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: rgba(59,130,246,0.08);
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 8px;
+      padding: 5px 12px;
+      font-size: 0.8rem; color: var(--accent2);
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .news-link:hover { background: rgba(59,130,246,0.18); }
 
-    /* ── Skills ── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
+    /* ── Summary ── */
+    .summary-box {
+      background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(167,139,250,0.08));
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: var(--radius);
+      padding: 28px 30px;
+      margin-top: 10px;
     }
-    .skill-card {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 20px;
-      transition: border-color .2s, transform .2s;
+    .summary-box h3 {
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--accent2);
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
     }
-    .skill-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-    .skill-icon { font-size: 1.8rem; margin-bottom: 10px; }
-    .skill-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
-    .skill-desc { font-size: 0.82rem; color: var(--text-muted); }
-
-    /* ── Blog Cards ── */
-    .blog-list { display: flex; flex-direction: column; gap: 16px; }
-    .blog-card {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 24px;
-      text-decoration: none; color: inherit;
-      display: flex; flex-direction: column; gap: 10px;
-      transition: border-color .2s, transform .2s, box-shadow .2s;
+    .summary-list { list-style: none; padding: 0; }
+    .summary-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.9rem; color: var(--text2);
+      display: flex; gap: 10px;
     }
-    .blog-card:hover {
-      border-color: var(--accent);
-      transform: translateX(4px);
-      box-shadow: var(--shadow);
+    .summary-list li:last-child { border-bottom: none; }
+    .summary-num {
+      color: var(--accent2); font-weight: 700;
+      min-width: 22px;
     }
-    .blog-meta {
-      display: flex; align-items: center; gap: 12px;
-      font-size: 0.8rem; color: var(--text-muted);
-    }
-    .blog-tag {
-      background: var(--tag-bg); color: var(--accent2);
-      border: 1px solid rgba(74,124,247,0.3);
-      border-radius: 999px; padding: 2px 10px;
-      font-size: 0.75rem;
-    }
-    .blog-title {
-      font-size: 1.05rem; font-weight: 700; color: var(--text);
-      line-height: 1.4;
-    }
-    .blog-excerpt { font-size: 0.88rem; color: var(--text-muted); }
-    .blog-footer {
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;
-    }
-    .read-more { color: var(--accent2); font-weight: 600; }
-
-    /* ── Contact ── */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-      gap: 14px;
-    }
-    .contact-item {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 18px 20px;
-      display: flex; align-items: center; gap: 12px;
-      text-decoration: none; color: var(--text);
-      transition: border-color .2s, transform .2s;
-    }
-    .contact-item:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .contact-icon { font-size: 1.4rem; }
-    .contact-label { font-size: 0.78rem; color: var(--text-muted); }
-    .contact-value { font-size: 0.9rem; font-weight: 600; }
 
     /* ── Footer ── */
     footer {
       border-top: 1px solid var(--border);
-      text-align: center; padding: 28px 2rem;
+      max-width: 820px; margin: 0 auto;
+      padding: 32px 2rem;
+      text-align: center;
       color: var(--text-muted); font-size: 0.82rem;
     }
-    footer span { color: var(--accent2); }
-
-    /* ── Divider ── */
-    .divider { height: 1px; background: var(--border); margin: 0 2rem 60px; max-width: 860px; margin-left: auto; margin-right: auto; }
+    footer .footer-brand { color: var(--accent2); font-weight: 600; }
+    footer .footer-ai { color: var(--orange); }
 
     /* ── Responsive ── */
     @media (max-width: 600px) {
       nav { padding: 0 1rem; }
-      .hero, section { padding-left: 1rem; padding-right: 1rem; }
+      .report-header, .news-container { padding-left: 1rem; padding-right: 1rem; }
+      .news-card { padding: 20px 18px; }
+      .summary-box { padding: 20px 18px; }
     }
   </style>
 </head>
@@ -204,152 +225,179 @@
 
 <!-- ── Navbar ── -->
 <nav>
-  <a href="#" class="nav-logo">LX · Dev</a>
-  <ul class="nav-links">
-    <li><a href="#about">关于</a></li>
-    <li><a href="#skills">技能</a></li>
-    <li><a href="#blog">博客</a></li>
-    <li><a href="#contact">联系</a></li>
-  </ul>
+  <a href="#" class="nav-logo">🤖 AI+CAE 每日动态</a>
+  <span class="nav-badge">自动生成 · WorkBuddy AI</span>
 </nav>
 
-<!-- ── Hero ── -->
-<div class="hero" id="about">
-  <div class="hero-badge">👋 欢迎来到我的博客</div>
-  <h1>Hi, 我是 <span>Liu Xiang</span><br />一名工程师</h1>
-  <p>专注于技术探索与分享，在这里记录我的学习笔记、项目心得和技术思考。</p>
-  <div class="hero-actions">
-    <a href="#blog" class="btn btn-primary">📖 阅读文章</a>
-    <a href="#contact" class="btn btn-ghost">💬 联系我</a>
+<!-- ── Header ── -->
+<div class="report-header">
+  <div class="report-badge">📊 每日精选资讯 · 第 20260510 期</div>
+  <h1><span>AI+CAE 每日动态精选</span></h1>
+  <div class="report-meta">
+    <span>📅 2026年5月10日</span>
+    <span>📝 5 条精选动态</span>
+    <span>⏱ 约 8 分钟阅读</span>
   </div>
 </div>
 
-<!-- ── Skills ── -->
-<section id="skills">
-  <div class="section-title">🛠 技能栈</div>
-  <p class="section-sub">我主要使用的技术与工具</p>
-  <div class="skills-grid">
-    <div class="skill-card">
-      <div class="skill-icon">⚡</div>
-      <div class="skill-name">后端开发</div>
-      <div class="skill-desc">Python · Go · Node.js · RESTful API</div>
+<div class="divider-wide"></div>
+
+<!-- ── News Items ── -->
+<div class="news-container">
+
+  <!-- 第1条 -->
+  <div class="news-card">
+    <div style="display:flex;align-items:center;margin-bottom:2px;">
+      <span class="news-num">1</span>
+      <span class="news-title">达索系统 SIMULIA 2026 R2026x 版本更新</span>
     </div>
-    <div class="skill-card">
-      <div class="skill-icon">🎨</div>
-      <div class="skill-name">前端技术</div>
-      <div class="skill-desc">React · TypeScript · HTML/CSS</div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-icon">🗄️</div>
-      <div class="skill-name">数据库</div>
-      <div class="skill-desc">MySQL · PostgreSQL · Redis · MongoDB</div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-icon">☁️</div>
-      <div class="skill-name">云与运维</div>
-      <div class="skill-desc">Docker · Linux · CI/CD · 腾讯云</div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-icon">🔧</div>
-      <div class="skill-name">开发工具</div>
-      <div class="skill-desc">Git · VS Code · Postman · Jira</div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-icon">🤖</div>
-      <div class="skill-name">AI / 大模型</div>
-      <div class="skill-desc">LLM 应用开发 · Prompt 工程</div>
+    <div class="news-body">
+      <span class="section-label">● 事件内容</span>
+      <ul>
+        <li>达索系统发布 SIMULIA 2026 R2026x 版本，对 3DEXPERIENCE 平台与 SIMULIA 组合进行重大更新</li>
+        <li><strong>流体仿真增强：</strong>采用统一 MODSIM 方法打通 CAD 与仿真链路，PowerFLOW 2025/2026 版本解决复杂空气动力学、传热、多相流难题</li>
+        <li><strong>电磁技术亮点：</strong>CST Studio Suite 优化仿真性能，高频求解器、自适应网格划分、HPC 技术突破性进展</li>
+        <li><strong>结构仿真增强：</strong>支持在 3DEXPERIENCE 平台或 Abaqus Unified FEA 应用中解决工程问题</li>
+      </ul>
+      <span class="section-label">● 值得关注的原因</span>
+      <ul class="check-list">
+        <li>达索系统作为全球 CAE 巨头，每次版本更新都代表行业技术方向</li>
+        <li>MODSIM 方法实现 CAD/CAE 深度融合，是 AI+CAE 未来发展的重要基础</li>
+        <li>本次更新虽未明确提及 AI 功能，但平台架构已为 AI 集成预留空间</li>
+      </ul>
+      <div class="news-links">
+        <a href="https://events.3ds.com/simulia-simulation-portfolio-r2026x" target="_blank" class="news-link">🔗 官方发布链接</a>
+      </div>
     </div>
   </div>
-</section>
 
-<div class="divider"></div>
-
-<!-- ── Blog ── -->
-<section id="blog">
-  <div class="section-title">📝 近期文章</div>
-  <p class="section-sub">技术笔记、项目复盘与思考随笔</p>
-  <div class="blog-list">
-
-    <a href="#" class="blog-card">
-      <div class="blog-meta">
-        <span class="blog-tag">后端</span>
-        <span>2026-05-08</span>
-        <span>· 5 分钟阅读</span>
+  <!-- 第2条 -->
+  <div class="news-card">
+    <div style="display:flex;align-items:center;margin-bottom:2px;">
+      <span class="news-num">2</span>
+      <span class="news-title">ANSYS 2026 R1：AI 原生仿真时代正式开启</span>
+    </div>
+    <div class="news-body">
+      <span class="section-label">● 事件内容</span>
+      <ul>
+        <li>新思科技（Synopsys）在完成对 Ansys 的收购后，于 2026年3月11日 发布 Ansys 2026 R1 版本</li>
+        <li><strong>引入 Agent 智能体：</strong>Mesh Agent（网格划分）+ Validation Agent（结果验证）</li>
+        <li><strong>新增 GeomAI 生成式设计工具：</strong>支持设计早期阶段 AI 辅助</li>
+        <li><strong>桌面版 SimAI：</strong>将 AI 仿真能力下沉到本地</li>
+        <li><strong>AI+ 技术贯穿全产品线：</strong>从预处理到后处理全流程 AI 赋能</li>
+      </ul>
+      <span class="section-label">● 值得关注的原因</span>
+      <ul class="check-list">
+        <li>Synopsys+Ansys 合并后的首个版本，影响全球 EDA+CAE 生态格局</li>
+        <li>Agent 智能体正式写入商用 CAE 软件，是 AI+CAE 从概念到产品的里程碑</li>
+        <li>GeomAI 将生成式 AI 引入设计阶段，实现 CAD/CAE/AI 三位一体</li>
+      </ul>
+      <div class="news-links">
+        <a href="https://www.sohu.com/a/1012975139_613767" target="_blank" class="news-link">🔗 搜狐报道</a>
+        <a href="https://baike.baidu.com/item/Ansys%202026%20R1/67511845" target="_blank" class="news-link">🔗 百度百科</a>
       </div>
-      <div class="blog-title">从零搭建高可用微服务架构：我踩过的那些坑</div>
-      <div class="blog-excerpt">当项目从单体应用演进到微服务，服务治理、链路追踪、配置中心……每一个环节都可能成为系统的瓶颈。本文分享我在生产环境中总结的实战经验。</div>
-      <div class="blog-footer">
-        <span>👁 1.2k 阅读 · ❤️ 48 点赞</span>
-        <span class="read-more">阅读全文 →</span>
-      </div>
-    </a>
-
-    <a href="#" class="blog-card">
-      <div class="blog-meta">
-        <span class="blog-tag">AI</span>
-        <span>2026-04-22</span>
-        <span>· 8 分钟阅读</span>
-      </div>
-      <div class="blog-title">LLM 应用开发实践：如何让大模型"记住"上下文</div>
-      <div class="blog-excerpt">大语言模型的上下文窗口是有限的，在长对话场景下如何管理记忆？本文深入剖析 RAG、向量数据库与 Memory 机制的工程实现。</div>
-      <div class="blog-footer">
-        <span>👁 3.4k 阅读 · ❤️ 127 点赞</span>
-        <span class="read-more">阅读全文 →</span>
-      </div>
-    </a>
-
-    <a href="#" class="blog-card">
-      <div class="blog-meta">
-        <span class="blog-tag">工具</span>
-        <span>2026-03-15</span>
-        <span>· 3 分钟阅读</span>
-      </div>
-      <div class="blog-title">我的开发效率工具箱：2026 年版本更新</div>
-      <div class="blog-excerpt">每年更新一次自己的效率工具清单。今年新增了几个 AI 辅助编程工具，整体开发速度提升明显，和大家分享一下使用心得。</div>
-      <div class="blog-footer">
-        <span>👁 987 阅读 · ❤️ 61 点赞</span>
-        <span class="read-more">阅读全文 →</span>
-      </div>
-    </a>
-
-    <a href="#" class="blog-card">
-      <div class="blog-meta">
-        <span class="blog-tag">思考</span>
-        <span>2026-02-28</span>
-        <span>· 6 分钟阅读</span>
-      </div>
-      <div class="blog-title">程序员如何做技术选型：我的决策框架</div>
-      <div class="blog-excerpt">每次技术选型都是一次押注。框架的活跃度、团队的学习成本、未来的可维护性……如何在诸多因素中找到最优解？分享我用了三年的选型方法论。</div>
-      <div class="blog-footer">
-        <span>👁 2.1k 阅读 · ❤️ 93 点赞</span>
-        <span class="read-more">阅读全文 →</span>
-      </div>
-    </a>
-
+    </div>
   </div>
-</section>
 
-<div class="divider"></div>
-
-<!-- ── Contact ── -->
-<section id="contact">
-  <div class="section-title">📬 联系我</div>
-  <p class="section-sub">欢迎交流技术、合作或留言探讨</p>
-  <div class="contact-grid">
-    <a href="mailto:hello@example.com" class="contact-item">
-      <div class="contact-icon">✉️</div>
-      <div>
-        <div class="contact-label">邮箱</div>
-        <div class="contact-value">953314173@qq.com</div>
+  <!-- 第3条 -->
+  <div class="news-card">
+    <div style="display:flex;align-items:center;margin-bottom:2px;">
+      <span class="news-num">3</span>
+      <span class="news-title">Ansys SimAI 平台：无代码 AI 仿真加速</span>
+    </div>
+    <div class="news-body">
+      <span class="section-label">● 事件内容</span>
+      <ul>
+        <li>Ansys SimAI™ 是一款 AI 仿真平台，通过从已有的仿真数据中学习，快速可靠地提供数据驱动的洞察</li>
+        <li><strong>无代码使用：</strong>用户无需编码或数据科学专业知识，只需上传数据即可使用</li>
+        <li><strong>10x 至 100x 加速：</strong>可提供 10倍至100倍的设计方案快速测试能力</li>
+        <li><strong>突破求解器约束：</strong>实现跨设计阶段的快速迭代</li>
+        <li><strong>低门槛操作：</strong>简单易操作的用户体验，降低 AI 仿真门槛</li>
+      </ul>
+      <span class="section-label">● 值得关注的原因</span>
+      <ul class="check-list">
+        <li>将 AI 仿真从"专家工具"转变为"工程师日常工具"，降低使用门槛</li>
+        <li>10x-100x 的速度提升对设计迭代有革命性影响</li>
+        <li>与 NVIDIA PhysicsNeMo 等工具形成生态互补</li>
+      </ul>
+      <div class="news-links">
+        <a href="https://www.ansys.com/zh-cn/products/ai/simai" target="_blank" class="news-link">🔗 Ansys 官网</a>
       </div>
-    </a>
-    </a>
+    </div>
   </div>
-</section>
+
+  <!-- 第4条 -->
+  <div class="news-card">
+    <div style="display:flex;align-items:center;margin-bottom:2px;">
+      <span class="news-num">4</span>
+      <span class="news-title">2026 CAE 仿真计算革命：从"等结果"到"秒出解"</span>
+    </div>
+    <div class="news-body">
+      <span class="section-label">● 事件内容</span>
+      <ul>
+        <li>中国 CAE 行业正经历一场静默而深刻的算力革命</li>
+        <li><strong>Ansys SimAI：</strong>将设计周期从 3 个月压缩到 2 周</li>
+        <li><strong>国产 GalaxyEDS：</strong>实现千亿网格、十万核并行</li>
+        <li><strong>GB 20072-2024 碰撞新标：</strong>推动仿真标准化</li>
+        <li><strong>AI 替代模型（Surrogate Model）：</strong>实现秒级预测</li>
+      </ul>
+      <span class="section-label">● 值得关注的原因</span>
+      <ul class="check-list">
+        <li>国产 CAE 软件在算力和规模上已具备国际竞争力</li>
+        <li>AI 替代模型是连接传统仿真与实时控制的关键技术</li>
+        <li>设计周期从 3个月→2周，对工程效率有质的影响</li>
+      </ul>
+      <div class="news-links">
+        <a href="https://zhuanlan.zhihu.com/p/2034055123740136153" target="_blank" class="news-link">🔗 知乎专栏</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第5条 -->
+  <div class="news-card">
+    <div style="display:flex;align-items:center;margin-bottom:2px;">
+      <span class="news-num">5</span>
+      <span class="news-title">物理AI与具身智能：数据维度的指数级跃升</span>
+    </div>
+    <div class="news-body">
+      <span class="section-label">● 事件内容</span>
+      <ul>
+        <li>2026年5月9日最新分析指出，具身智能（Embodied AI）正面临"物理课"补课挑战</li>
+        <li><strong>自动驾驶经验不适用具身智能：</strong>后者需在复杂 3D 空间中判断材质、发力方式、物理反馈</li>
+        <li><strong>数据维度指数级跃升：</strong>真机采集难度极高</li>
+        <li><strong>物理AI成为2026年最热赛道：</strong>西门子、NVIDIA、达索系统等巨头纷纷布局</li>
+        <li><strong>工业场景落地加速：</strong>人形机器人进工厂、数字孪生秒级响应</li>
+      </ul>
+      <span class="section-label">● 值得关注的原因</span>
+      <ul class="check-list">
+        <li>CAE 仿真数据是训练具身智能的"合成数据"重要来源</li>
+        <li>物理AI将倒逼 CAE 仿真向"实时化""高精度"双向突破</li>
+        <li>西门子+NVIDIA 生态已验证 Physical AI 从概念到产线的可行性</li>
+      </ul>
+      <div class="news-links">
+        <a href="https://finance.sina.com.cn/jjxw/2026-05-09/doc-inhxhuvc6810854.shtml" target="_blank" class="news-link">🔗 新浪财经</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 总结 ── -->
+  <div class="summary-box">
+    <h3>📌 总结与趋势判断</h3>
+    <ul class="summary-list">
+      <li><span class="summary-num">1</span><span><strong>AI 原生 CAE 时代已至：</strong>ANSYS 2026 R1 引入 Agent，标志着 AI 从"插件"升级为"原生能力"</span></li>
+      <li><span class="summary-num">2</span><span><strong>国产 CAE 迎头赶上：</strong>GalaxyEDS 等国产工具在算力规模上已具备竞争力</span></li>
+      <li><span class="summary-num">3</span><span><strong>替代模型成关键赛道：</strong>Surrogate Model 是连接离线仿真与实时控制的核心技术</span></li>
+      <li><span class="summary-num">4</span><span><strong>物理AI打开新空间：</strong>具身智能、人形机器人将海量 CAE 仿真数据需求提上日程</span></li>
+      <li><span class="summary-num">5</span><span><strong>生态整合成主旋律：</strong>Synopsys+Ansys、Siemens+NVIDIA、Dassault+NVIDIA 三大联盟格局初定</span></li>
+    </ul>
+  </div>
+
+</div>
 
 <!-- ── Footer ── -->
 <footer>
-  <p>© 2026 <span>Liu Xiang</span> · 用热爱驱动代码，用思考记录成长</p>
+  <p>🤖 本报告由 <span class="footer-brand">WorkBuddy AI</span> 自动生成</p>
+  <p style="margin-top:6px;">📅 生成时间：2026年5月10日 14:33 &nbsp;|&nbsp; 📧 每日推送至邮箱</p>
 </footer>
 
 </body>
