@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liu Xiang · 工程师博客</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #0f1117;
+      --bg2:       #171b26;
+      --bg3:       #1e2333;
+      --border:    #2a3044;
+      --accent:    #4a7cf7;
+      --accent2:   #6e9fff;
+      --text:      #e2e8f0;
+      --text-muted:#8892a4;
+      --tag-bg:    #1a2540;
+      --radius:    12px;
+      --shadow:    0 4px 24px rgba(0,0,0,0.4);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── Navbar ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,17,23,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--accent2);
+      letter-spacing: 0.5px;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted); text-decoration: none;
+      font-size: 0.92rem; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent2); }
+
+    /* ── Hero ── */
+    .hero {
+      max-width: 860px; margin: 0 auto;
+      padding: 80px 2rem 60px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--tag-bg); color: var(--accent2);
+      border: 1px solid var(--border);
+      border-radius: 999px; padding: 4px 14px;
+      font-size: 0.8rem; margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800; line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.1rem; color: var(--text-muted);
+      max-width: 560px; margin-bottom: 32px;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px; border-radius: 8px;
+      font-size: 0.92rem; font-weight: 600;
+      text-decoration: none; cursor: pointer; border: none;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      box-shadow: 0 0 20px rgba(74,124,247,0.35);
+    }
+    .btn-primary:hover { box-shadow: 0 0 28px rgba(74,124,247,0.55); }
+    .btn-ghost {
+      background: var(--bg3); color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    /* ── Section Common ── */
+    section { max-width: 860px; margin: 0 auto; padding: 0 2rem 60px; }
+    .section-title {
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--text); margin-bottom: 8px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .section-sub {
+      color: var(--text-muted); font-size: 0.88rem; margin-bottom: 28px;
+    }
+
+    /* ── Skills ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .skill-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      transition: border-color .2s, transform .2s;
+    }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .skill-icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .skill-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
+    .skill-desc { font-size: 0.82rem; color: var(--text-muted); }
+
+    /* ── Blog Cards ── */
+    .blog-list { display: flex; flex-direction: column; gap: 16px; }
+    .blog-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; gap: 10px;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .blog-card:hover {
+      border-color: var(--accent);
+      transform: translateX(4px);
+      box-shadow: var(--shadow);
+    }
+    .blog-meta {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 0.8rem; color: var(--text-muted);
+    }
+    .blog-tag {
+      background: var(--tag-bg); color: var(--accent2);
+      border: 1px solid rgba(74,124,247,0.3);
+      border-radius: 999px; padding: 2px 10px;
+      font-size: 0.75rem;
+    }
+    .blog-title {
+      font-size: 1.05rem; font-weight: 700; color: var(--text);
+      line-height: 1.4;
+    }
+    .blog-excerpt { font-size: 0.88rem; color: var(--text-muted); }
+    .blog-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;
+    }
+    .read-more { color: var(--accent2); font-weight: 600; }
+
+    /* ── Contact ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 14px;
+    }
+    .contact-item {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px 20px;
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none; color: var(--text);
+      transition: border-color .2s, transform .2s;
+    }
+    .contact-item:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .contact-icon { font-size: 1.4rem; }
+    .contact-label { font-size: 0.78rem; color: var(--text-muted); }
+    .contact-value { font-size: 0.9rem; font-weight: 600; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center; padding: 28px 2rem;
+      color: var(--text-muted); font-size: 0.82rem;
+    }
+    footer span { color: var(--accent2); }
+
+    /* ── Divider ── */
+    .divider { height: 1px; background: var(--border); margin: 0 2rem 60px; max-width: 860px; margin-left: auto; margin-right: auto; }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      nav { padding: 0 1rem; }
+      .hero, section { padding-left: 1rem; padding-right: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navbar ── -->
+<nav>
+  <a href="#" class="nav-logo">LX · Dev</a>
+  <ul class="nav-links">
+    <li><a href="#about">关于</a></li>
+    <li><a href="#skills">技能</a></li>
+    <li><a href="#blog">博客</a></li>
+    <li><a href="#contact">联系</a></li>
+  </ul>
+</nav>
+
+<!-- ── Hero ── -->
+<div class="hero" id="about">
+  <div class="hero-badge">👋 欢迎来到我的博客</div>
+  <h1>Hi, 我是 <span>Liu Xiang</span><br />一名工程师</h1>
+  <p>专注于技术探索与分享，在这里记录我的学习笔记、项目心得和技术思考。</p>
+  <div class="hero-actions">
+    <a href="#blog" class="btn btn-primary">📖 阅读文章</a>
+    <a href="#contact" class="btn btn-ghost">💬 联系我</a>
+  </div>
+</div>
+
+<!-- ── Skills ── -->
+<section id="skills">
+  <div class="section-title">🛠 技能栈</div>
+  <p class="section-sub">我主要使用的技术与工具</p>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">⚡</div>
+      <div class="skill-name">后端开发</div>
+      <div class="skill-desc">Python · Go · Node.js · RESTful API</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🎨</div>
+      <div class="skill-name">前端技术</div>
+      <div class="skill-desc">React · TypeScript · HTML/CSS</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🗄️</div>
+      <div class="skill-name">数据库</div>
+      <div class="skill-desc">MySQL · PostgreSQL · Redis · MongoDB</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">☁️</div>
+      <div class="skill-name">云与运维</div>
+      <div class="skill-desc">Docker · Linux · CI/CD · 腾讯云</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔧</div>
+      <div class="skill-name">开发工具</div>
+      <div class="skill-desc">Git · VS Code · Postman · Jira</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🤖</div>
+      <div class="skill-name">AI / 大模型</div>
+      <div class="skill-desc">LLM 应用开发 · Prompt 工程</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── Blog ── -->
+<section id="blog">
+  <div class="section-title">📝 近期文章</div>
+  <p class="section-sub">技术笔记、项目复盘与思考随笔</p>
+  <div class="blog-list">
+
+    <a href="#" class="blog-card">
+      <div class="blog-meta">
+        <span class="blog-tag">后端</span>
+        <span>2026-05-08</span>
+        <span>· 5 分钟阅读</span>
+      </div>
+      <div class="blog-title">从零搭建高可用微服务架构：我踩过的那些坑</div>
+      <div class="blog-excerpt">当项目从单体应用演进到微服务，服务治理、链路追踪、配置中心……每一个环节都可能成为系统的瓶颈。本文分享我在生产环境中总结的实战经验。</div>
+      <div class="blog-footer">
+        <span>👁 1.2k 阅读 · ❤️ 48 点赞</span>
+        <span class="read-more">阅读全文 →</span>
+      </div>
+    </a>
+
+    <a href="#" class="blog-card">
+      <div class="blog-meta">
+        <span class="blog-tag">AI</span>
+        <span>2026-04-22</span>
+        <span>· 8 分钟阅读</span>
+      </div>
+      <div class="blog-title">LLM 应用开发实践：如何让大模型"记住"上下文</div>
+      <div class="blog-excerpt">大语言模型的上下文窗口是有限的，在长对话场景下如何管理记忆？本文深入剖析 RAG、向量数据库与 Memory 机制的工程实现。</div>
+      <div class="blog-footer">
+        <span>👁 3.4k 阅读 · ❤️ 127 点赞</span>
+        <span class="read-more">阅读全文 →</span>
+      </div>
+    </a>
+
+    <a href="#" class="blog-card">
+      <div class="blog-meta">
+        <span class="blog-tag">工具</span>
+        <span>2026-03-15</span>
+        <span>· 3 分钟阅读</span>
+      </div>
+      <div class="blog-title">我的开发效率工具箱：2026 年版本更新</div>
+      <div class="blog-excerpt">每年更新一次自己的效率工具清单。今年新增了几个 AI 辅助编程工具，整体开发速度提升明显，和大家分享一下使用心得。</div>
+      <div class="blog-footer">
+        <span>👁 987 阅读 · ❤️ 61 点赞</span>
+        <span class="read-more">阅读全文 →</span>
+      </div>
+    </a>
+
+    <a href="#" class="blog-card">
+      <div class="blog-meta">
+        <span class="blog-tag">思考</span>
+        <span>2026-02-28</span>
+        <span>· 6 分钟阅读</span>
+      </div>
+      <div class="blog-title">程序员如何做技术选型：我的决策框架</div>
+      <div class="blog-excerpt">每次技术选型都是一次押注。框架的活跃度、团队的学习成本、未来的可维护性……如何在诸多因素中找到最优解？分享我用了三年的选型方法论。</div>
+      <div class="blog-footer">
+        <span>👁 2.1k 阅读 · ❤️ 93 点赞</span>
+        <span class="read-more">阅读全文 →</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── Contact ── -->
+<section id="contact">
+  <div class="section-title">📬 联系我</div>
+  <p class="section-sub">欢迎交流技术、合作或留言探讨</p>
+  <div class="contact-grid">
+    <a href="mailto:hello@example.com" class="contact-item">
+      <div class="contact-icon">✉️</div>
+      <div>
+        <div class="contact-label">邮箱</div>
+        <div class="contact-value">hello@example.com</div>
+      </div>
+    </a>
+    <a href="https://github.com/" target="_blank" class="contact-item">
+      <div class="contact-icon">🐙</div>
+      <div>
+        <div class="contact-label">GitHub</div>
+        <div class="contact-value">github.com/liuxiang</div>
+      </div>
+    </a>
+    <a href="#" class="contact-item">
+      <div class="contact-icon">💼</div>
+      <div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value">linkedin.com/in/liuxiang</div>
+      </div>
+    </a>
+    <a href="#" class="contact-item">
+      <div class="contact-icon">🐦</div>
+      <div>
+        <div class="contact-label">微信公众号</div>
+        <div class="contact-value">LiuXiang_Dev</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <p>© 2026 <span>Liu Xiang</span> · 用热爱驱动代码，用思考记录成长</p>
+</footer>
+
+</body>
+</html>
